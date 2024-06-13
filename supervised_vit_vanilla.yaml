@@ -1,0 +1,28 @@
+trainer:
+  logger:
+   class_path: lightning.pytorch.loggers.wandb.WandbLogger
+   init_args:
+     name: "supervised"
+     project: "vfm-uda"
+     resume: allow
+  devices: 1
+  num_nodes: 1
+  max_steps: 40000
+  val_check_interval: 1000
+  check_val_every_n_epoch: null
+model:
+  class_path: training.uda_vit.supervised_vit_generic.SupervisedVITGeneric
+  init_args:
+    network:
+      class_path: models.vit_variants.vit_lightweight_head.VITLightweightHead
+      init_args:
+        model_name: "dinov2_vitb14"
+        num_classes: 19
+data:
+  class_path: datasets.uda_multitrain_multival_datamodule.UDAMultiTrainMultiValDataModule
+  init_args:
+    use_rcs: true
+    batch_size: 8
+    train_num_workers: 4
+    img_size: 1024
+    sources: [ "gta5" ]

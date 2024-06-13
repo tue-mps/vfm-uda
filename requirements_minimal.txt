@@ -1,0 +1,16 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
+lightning
+lightning[pytorch-extra]
+torch
+torchvision
+torchmetrics
+wandb
+timm
+matplotlib
+pycocotools
+opencv-python
+opencv-python
+transformers
+scipy
+gitignore_parser
+xformers

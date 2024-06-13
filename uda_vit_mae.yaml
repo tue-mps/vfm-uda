@@ -1,0 +1,30 @@
+trainer:
+  logger:
+   class_path: lightning.pytorch.loggers.wandb.WandbLogger
+   init_args:
+     name: "mae"
+     project: "vfm-uda"
+     resume: allow
+  devices: 1
+  num_nodes: 1
+  max_steps: 40000
+  val_check_interval: 1000
+model:
+  class_path: training.uda_vit.uda_vit_generic.UDAVITGeneric
+  init_args:
+    lr_multiplier: 0.1
+    token_mask_ratio: 0.7
+    network:
+      class_path: models.vit_variants.vit_lightweight_head_timm.VITLightweightHeadTimm
+      init_args:
+        model_name: "timm/vit_base_patch16_224.mae"
+        num_classes: 19
+data:
+  class_path: datasets.uda_multitrain_multival_datamodule.UDAMultiTrainMultiValDataModule
+  init_args:
+    use_rcs: true
+    batch_size: 8
+    train_num_workers: 4
+    img_size: 1024
+    sources: [ "gta5" ]
+    targets: [ "cityscapes" ]
