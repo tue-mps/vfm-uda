@@ -1,8 +1,8 @@
 # Exploring the Benefits of Vision Foundation Models for Unsupervised Domain Adaptation (CVPR 2024 Second Workshop on Foundation Models)
 **Authors:** Bruno B. Englert, Fabrizio J. Piva, Tommie Kerssies, Daan de Geus, Gijs Dubbelman  
-**Affiliation:** Eindhoven University of Technology
+**Affiliation:** Eindhoven University of Technology  
 **Publication:** CVPR 2024 Workshop Proceedings for the Second Workshop on Foundation Models  
-**Paper:** [arXiv](https://arxiv.org/abs/XXXX)  
+**Paper:** [arXiv](http://arxiv.org/abs/2406.09896)  
 **Code**: [GitHub](https://github.com/tue-mps/vfm-uda)
 
 ## Abstract
