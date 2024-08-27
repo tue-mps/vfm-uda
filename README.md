@@ -47,8 +47,8 @@ All the zipped data should be placed under one directory. No unzipping is requir
 
 ## Citation
 ```
-@inproceedings{,
-  author={Englert, Brunó B., Piva, Fabrizio J., Kerssies, Tommie, de Geus, Daan and Dubbelman, Gijs},
+@inproceedings{englert2024exploring,
+  author={{Englert, Brunó B.} and {Piva, Fabrizio J.} and {Kerssies, Tommie} and {de Geus, Daan} and {Dubbelman, Gijs}},
   title={Exploring the Benefits of Vision Foundation Models for Unsupervised Domain Adaptation},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
   year={2024},
