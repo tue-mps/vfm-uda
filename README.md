@@ -41,9 +41,43 @@ All the zipped data should be placed under one directory. No unzipping is requir
    ```bash
    python main.py fit -c uda_vit_vanilla.yaml --root /data  --trainer.devices [0]
    ```
-   (replace ```/data``` with the folder where you stored the datasets)  
+   (replace ```/data``` with the folder where you stored the datasets)
 
 
+6. **Reproducibility**
+
+  We note that there are small variations in performance between training runs, due to the stochasticity in the process, particularly for UDA techniques. Therefore, results may differ slightly depending on the random seed.’
+
+## Models
+<table><tbody>
+<!-- START TABLE -->
+<!-- TABLE HEADER -->
+<th valign="bottom">Method</th>
+<th valign="bottom">Backbone</th>
+<th valign="bottom">Pre-training</th>
+<th valign="bottom">Cityscapes (miou)</th>
+<th valign="bottom">WildDash2 (miou)</th>
+<th valign="bottom">model</th>
+<!-- TABLE BODY -->
+
+<tr><td align="left">VFM-UDA</td>
+<td align="center">ViT-B</td>
+<td align="center">DINOv2</td>
+<td align="center">77.1</td>
+<td align="center">60.8</td>
+<td align="center"><a href="https://huggingface.co/englert/vfmuda/blob/main/vfmuda_base_77miou_step40000.ckpt">model</a></td>
+</tr>
+
+<tr><td align="left">VFM-UDA</td>
+<td align="center">ViT-L</td>
+<td align="center">DINOv2</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">TBA</td>
+</tr>
+</tbody></table>
+
+*Note: these models are re-trained, so the results differ slightly from those reported in the paper.*
 
 ## Citation
 ```
