@@ -55,7 +55,7 @@ class UDAMultiTrainMultiValDataModule(CustomLightningDataModule):
         assert "cityscapesextra" not in self.sources
         # assert self.val_batch_size == 1  # val with multi ds requires batch size 1
         assert not bool(set(self.sources) & set(self.targets)), "sources and targets shouldn't share any datasets"
-        self.save_hyperparameters()
+        self.save_hyperparameters(ignore=['_class_path', "class_path", "init_args"])
 
         self.gta5_train_transforms = UDATransform(
             img_size=int(1440 * in_img_scale),

@@ -2,7 +2,7 @@
 # Copyright (c) 2024 Mobile Perception Systems Lab at TU/e. All rights reserved.
 # Licensed under the MIT License
 # ---------------------------------------------------------------
-
+import os
 
 import torch
 import torch.nn as nn
@@ -20,6 +20,7 @@ class VITLightweightHead(nn.Module):
             num_classes: int = None,
             patch_size: int = 14,
             align_corners: bool = False,
+            ckpt_path: str = None,
     ):
         super().__init__()
         self.img_size = img_size
@@ -57,6 +58,37 @@ class VITLightweightHead(nn.Module):
         out = nn.Conv2d(self.encoder.embed_dim // 4, num_classes, kernel_size=1, padding=0, bias=False)
         torch.nn.init.normal_(out.weight, 0, std=0.1)
         self.out = out
+
+        if ckpt_path is not None:
+            if "https://huggingface.co" in ckpt_path:
+                chkpt_state_dict = torch.hub.load_state_dict_from_url(ckpt_path)['state_dict']
+            else:
+                assert os.path.exists(ckpt_path), "{}".format(ckpt_path)
+                chkpt_state_dict = torch.load(ckpt_path)["state_dict"]
+
+            chkpt_state_dict = {k: v for k, v in chkpt_state_dict.items() if ("network_feature_extractor" not in k)}
+            encoder_chkpt_state_dict = {k.replace("network.encoder.", ""): v for k, v in chkpt_state_dict.items() if
+                                        "network.encoder" in k}
+            upscale_chkpt_state_dict = {k.replace("network.upscale.", ""): v for k, v in chkpt_state_dict.items() if
+                                        "network.upscale" in k}
+            out_chkpt_state_dict = {k.replace("network.out.", ""): v for k, v in chkpt_state_dict.items() if
+                                    "network.out." in k}
+
+            # do same basic key check, just to be sure
+            match_factor = len(set(encoder_chkpt_state_dict).intersection(self.encoder.state_dict())) / max(
+                len(set(encoder_chkpt_state_dict)), len(set(self.encoder.state_dict())))
+            print("{}x of keys match when loading vit adapter checkpoint".format(match_factor))
+            match_factor = len(set(upscale_chkpt_state_dict).intersection(self.upscale.state_dict())) / max(
+                len(set(upscale_chkpt_state_dict)), len(set(self.upscale.state_dict())))
+            print("{}x of keys match when loading upscale head checkpoint".format(match_factor))
+            match_factor = len(set(out_chkpt_state_dict).intersection(self.out.state_dict())) / max(
+                len(set(out_chkpt_state_dict)), len(set(self.out.state_dict())))
+            print("{}x of keys match when loading out head checkpoint".format(match_factor))
+
+            self.encoder.load_state_dict(encoder_chkpt_state_dict, strict=True)
+            self.upscale.load_state_dict(upscale_chkpt_state_dict, strict=True)
+            self.out.load_state_dict(out_chkpt_state_dict, strict=True)
+
 
         self.param_defs_decoder = [
             ("out", self.out),
