@@ -16,7 +16,8 @@ Achieving robust generalization across diverse data domains remains a significan
 ## Installation 
 1. **Create a Weights & Biases (W&B) account.**
    - The metrics during training are visualized with W&B: https://wandb.ai 
-   - 
+
+
 2. **Environment setup.**
      ```bash 
     conda create -n fuda python=3.10 && conda activate fuda
