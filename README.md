@@ -53,7 +53,7 @@ We recommend using 4 GPUs with 2 batch size per GPU. On a A100, training a ViT-L
    ```
    (replace ```/data``` with the folder where you stored the datasets)
 
-  We note that there are small variations in performance between training runs, due to the stochasticity in the process, particularly for UDA techniques. Therefore, results may differ slightly depending on the random seed.’
+*Note: there are small variations in performance between training runs, due to the stochasticity in the process, particularly for UDA techniques. Therefore, results may differ slightly depending on the random seed.*
 
 
 ### Evaluating
