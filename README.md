@@ -7,7 +7,7 @@
 
 🔔 **News:**
 * [2025-03-30] We are happy to announce that our analysis work ["What is the Added Value of UDA in the VFM Era?"](https://arxiv.org/abs/2504.18190) was accepted at **CVPRW25**.
-* [2025-03-11] We are happy to announce that our work [VFM-UDA++](https://arxiv.org/abs/2503.10685), an improvement of VFM-UDA, was released on arXiv.
+* [2025-03-11] We are happy to announce that our work [VFM-UDA++](https://arxiv.org/abs/2503.10685), an improvement of VFM-UDA, was accepted at **ICCVW25**.
 
 
 ## Abstract
